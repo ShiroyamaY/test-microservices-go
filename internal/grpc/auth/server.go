@@ -22,8 +22,8 @@ type Auth interface {
 		ctx context.Context,
 		email string,
 		password string,
-	) (userId int64, err error)
-	IsAdmin(ctx context.Context, userId int64) (isAdmin bool, err error)
+	) (userID int64, err error)
+	IsAdmin(ctx context.Context, userID int64) (isAdmin bool, err error)
 }
 
 type serverAPI struct {
@@ -94,7 +94,7 @@ func validateLogin(req *ssov1.LoginRequest) error {
 	}
 
 	if req.GetAppId() == emptyValue {
-		return status.Error(codes.InvalidArgument, "appId is required")
+		return status.Error(codes.InvalidArgument, "appID is required")
 	}
 
 	return nil
